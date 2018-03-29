@@ -1,13 +1,11 @@
 (function () {
   const KEYS = {
-    ALT: 18,
     LEFT: 37,
     RIGHT: 39
   };
   const template = document.getElementById(`templates`);
   const screens = template && template.content.querySelectorAll(`.main`);
   const main = document.querySelector(`.main`);
-  let isAltPress = false;
   let currentScreen = 0;
 
   const getScreen = (i) => screens[i] || screens[currentScreen];
@@ -21,30 +19,15 @@
   };
 
   const onKeyUpHandler = (evt) => {
-    if (evt.keyCode === KEYS.ALT) {
-      isAltPress = false;
+    if (evt.keyCode === KEYS.RIGHT && event.altKey) {
+      showScreen(currentScreen + 1);
+    }
+
+    if (evt.keyCode === KEYS.LEFT && event.altKey) {
+      showScreen(currentScreen - 1);
     }
   };
 
-  const onKeyDownHandler = (evt) => {
-    switch (evt.keyCode) {
-      case KEYS.ALT:
-        isAltPress = true;
-        break;
-      case KEYS.RIGHT:
-        if (isAltPress) {
-          showScreen(currentScreen + 1);
-        }
-        break;
-      case KEYS.LEFT:
-        if (isAltPress) {
-          showScreen(currentScreen - 1);
-        }
-        break;
-    }
-  };
-
-  document.addEventListener(`keydown`, onKeyDownHandler);
   document.addEventListener(`keyup`, onKeyUpHandler);
 
   showScreen(currentScreen);
