@@ -19,11 +19,11 @@
   };
 
   const onKeyUpHandler = (evt) => {
-    if (evt.keyCode === KEYS.RIGHT && event.altKey) {
+    if (evt.keyCode === KEYS.RIGHT && evt.altKey) {
       showScreen(currentScreen + 1);
     }
 
-    if (evt.keyCode === KEYS.LEFT && event.altKey) {
+    if (evt.keyCode === KEYS.LEFT && evt.altKey) {
       showScreen(currentScreen - 1);
     }
   };
