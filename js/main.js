@@ -23,7 +23,6 @@
   const onKeyUpHandler = (evt) => {
     if (evt.keyCode === KEYS.ALT) {
       isAltPress = false;
-      document.addEventListener(`keyup`, onKeyUpHandler);
     }
   };
 
@@ -31,7 +30,6 @@
     switch (evt.keyCode) {
       case KEYS.ALT:
         isAltPress = true;
-        document.addEventListener(`keyup`, onKeyUpHandler);
         break;
       case KEYS.RIGHT:
         if (isAltPress) {
@@ -47,6 +45,7 @@
   };
 
   document.addEventListener(`keydown`, onKeyDownHandler);
+  document.addEventListener(`keyup`, onKeyUpHandler);
 
   showScreen(currentScreen);
 })();
