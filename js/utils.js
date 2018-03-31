@@ -1,5 +1,5 @@
 export const getElementFromTemplate = (str) => {
-  const element = document.createElement('div');
+  const element = document.createElement(`div`);
   element.innerHTML = str;
 
   const fragment = [...element.children].reduce((res, child) => {
