@@ -94,9 +94,10 @@ export default () => {
   const answers = screen.querySelectorAll(`input[name=answer]`);
   [...answers].forEach((answer) => {
     answer.addEventListener(`change`, () => {
-      if ([...answers].some((item) => item.checked) && sendBtn.getAttribute(`disabled`)) {
+      const isAnswerExist = [...answers].some((item) => item.checked);
+      if (isAnswerExist && sendBtn.getAttribute(`disabled`)) {
         sendBtn.removeAttribute(`disabled`);
-      } else if (!sendBtn.getAttribute(`disabled`)) {
+      } else if (!isAnswerExist && !sendBtn.getAttribute(`disabled`)) {
         sendBtn.setAttribute(`disabled`, `true`);
       }
     });
