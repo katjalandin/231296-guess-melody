@@ -1,4 +1,7 @@
 import {getElementFromTemplate} from '../../utils';
+import showScreen from '../../show-screen';
+import getGenteScreen from './gente';
+
 const template = `<!-- Игра на выбор исполнителя -->
   <section class="main main--level main--level-artist">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
@@ -62,4 +65,14 @@ const template = `<!-- Игра на выбор исполнителя -->
 
 const artistScreen = getElementFromTemplate(template);
 
-export default artistScreen;
+export default () => {
+  const screen = artistScreen.cloneNode(true);
+
+  const answers = screen.querySelectorAll(`.main-answer`);
+  [...answers].forEach((answer) => {
+    answer.addEventListener(`click`, () => showScreen(getGenteScreen()));
+  });
+
+  return screen;
+};
+

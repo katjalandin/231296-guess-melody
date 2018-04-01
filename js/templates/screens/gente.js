@@ -1,4 +1,7 @@
-import {getElementFromTemplate} from '../../utils';
+import {getElementFromTemplate, getRandomArrayItem} from '../../utils';
+import showScreen from '../../show-screen';
+import gerReturnScreen, {screenTypes} from './result';
+
 const template = `<!-- Игра на выбор жанра -->
   <section class="main main--level main--level-genre">
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
@@ -78,11 +81,32 @@ const template = `<!-- Игра на выбор жанра -->
           <label class="genre-answer-check" for="a-4"></label>
         </div>
 
-        <button class="genre-answer-send" type="submit">Ответить</button>
+        <button class="genre-answer-send" type="submit" disabled="true">Ответить</button>
       </form>
     </div>
   </section>`;
 
 const genteScreen = getElementFromTemplate(template);
 
-export default genteScreen;
+export default () => {
+  const screen = genteScreen.cloneNode(true);
+  const sendBtn = screen.querySelector(`.genre-answer-send`);
+  const answers = screen.querySelectorAll(`input[name=answer]`);
+  [...answers].forEach((answer) => {
+    answer.addEventListener(`change`, () => {
+      if ([...answers].some((item) => item.checked) && sendBtn.getAttribute(`disabled`)) {
+        sendBtn.removeAttribute(`disabled`);
+      } else if (!sendBtn.getAttribute(`disabled`)) {
+        sendBtn.setAttribute(`disabled`, `true`);
+      }
+    });
+  });
+
+  sendBtn.addEventListener(`click`, (evt) => {
+    evt.preventDefault();
+    showScreen(gerReturnScreen(getRandomArrayItem(screenTypes)));
+  });
+
+  return screen;
+};
+

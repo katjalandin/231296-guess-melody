@@ -1,4 +1,7 @@
 import {getElementFromTemplate} from '../../utils';
+import showScreen from '../../show-screen';
+import getWelcomeScreen from './welcome';
+
 const templates = {
   default: `<!-- Результат игры: выигрыш -->
     <section class="main main--result">
@@ -29,8 +32,12 @@ const templates = {
     </section>`
 };
 
-export default {
-  default: getElementFromTemplate(templates.default),
-  timeExpire: getElementFromTemplate(templates.timeExpire),
-  attemptsExpire: getElementFromTemplate(templates.attemptsExpire),
+export const screenTypes = Object.keys(templates);
+export default (screenType) => {
+  const template = templates[screenType];
+  const screen = getElementFromTemplate(template);
+  const replayBtn = screen.querySelector(`.main-replay`);
+  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen()));
+
+  return screen;
 };

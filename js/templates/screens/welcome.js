@@ -1,4 +1,7 @@
 import {getElementFromTemplate} from '../../utils';
+import showScreen from '../../show-screen';
+import getArtistScreen from './artist';
+
 const template = `<!-- Приветствие -->
   <section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
@@ -13,4 +16,11 @@ const template = `<!-- Приветствие -->
 
 const welcomeScreen = getElementFromTemplate(template);
 
-export default welcomeScreen;
+export default () => {
+  const screen = welcomeScreen.cloneNode(true);
+
+  const playBtn = screen.querySelector(`.main-play`);
+  playBtn.addEventListener(`click`, () => showScreen(getArtistScreen()));
+
+  return screen;
+};

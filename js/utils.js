@@ -10,3 +10,9 @@ export const getElementFromTemplate = (str) => {
 
   return fragment;
 };
+
+export const getRandomArrayItem = (arr) => {
+  const length = arr.length - 1;
+
+  return arr[Math.trunc(Math.random() * length)];
+};
