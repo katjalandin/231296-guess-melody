@@ -16,3 +16,12 @@ export const getRandomArrayItem = (arr) => {
 
   return arr[Math.trunc(Math.random() * length)];
 };
+
+export const times = (n, obj) => {
+  const result = [];
+  for(let i = 0; i < n; i++) {
+    result[i] = Object.assign({}, obj);
+  }
+
+  return result;
+};
