@@ -9,13 +9,6 @@ const getPoints = ({ isCorrect, time }) => {
   return 1;
 };
 
-const res = {
-  userId: 1,
-  points: 14,
-  remainNotes: 2,
-  remainTimes: 22
-};
-
 export const calculateResult = (answers, remainNotes = 0) => {
   if (!remainNotes) {
     return 0;
@@ -35,9 +28,17 @@ export const calculateResult = (answers, remainNotes = 0) => {
   return (answers || []).reduce((res, answer) => res + getPoints(answer), 0);
 };
 
-export const showUserResult = (total, result) => {
-  const userResult = {result, currentUser: true};
-  const all = [...results, userResult].sort((a, b) => a.points > b.points);
+export const showUserResult = (total = res, result) => {
+  const userResult = Object.assign({}, result, {currentUser: true});
+  const all = [...total, userResult].sort((a, b) => a.points < b.points);
   const pos = all.findIndex(item => item.currentUser) + 1;
-  const persent = Math.round((pos / all.length) * 100);
+  const persent = Math.round(((all.length - pos) / all.length) * 100);
+
+  if (result.points > 0) {
+    return `Вы заняли ${pos}-ое место из ${all.length}. Это лучше чем у ${persent}% игроков.`;
+  } else if (result.remainTimes === 0) {
+    return `Время вышло! Вы не успели отгадать все мелодии`;
+  }
+
+  return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
 };
