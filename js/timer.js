@@ -1,4 +1,18 @@
-export const getTimer = (time) => {
+const tick = () => {
+  if (this.seconds > 0) {
+    return --this.seconds;
+  }
 
-  return setTimeout(callback, time);
+  return `Таймер остановлен`;
+};
+
+export default (seconds) => {
+  if (!Number.isInteger(seconds) || seconds < 0) {
+    return -1;
+  }
+
+  return {
+    seconds,
+    tick
+  };
 };
