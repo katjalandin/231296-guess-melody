@@ -1,6 +1,11 @@
 import {assert} from 'chai';
 import {times} from '../../utils';
-import {calculateResult, showUserResult} from './result-calc';
+import {
+  calculateResult,
+  showUserResult,
+  MAX_ANSWERS,
+  LIFE_COUNT
+} from './result-calc';
 
 const TEST_ANSWERS = {
   quick: {
@@ -69,6 +74,22 @@ describe(`Result page`, () => {
 
     it(`if don't remain notes return 0`, () => {
       assert.equal(calculateResult(times(10, TEST_ANSWERS.correct), 0), 0);
+    });
+
+    it(`${LIFE_COUNT} incorrect and ${MAX_ANSWERS - LIFE_COUNT} quick answer return 14`, () => {
+      assert.equal(calculateResult(
+        [
+          ...times(LIFE_COUNT, TEST_ANSWERS.incorrect),
+          ...times(MAX_ANSWERS - LIFE_COUNT, TEST_ANSWERS.quick)
+        ], 0), 11);
+    });
+
+    it(`${LIFE_COUNT} incorrect and ${MAX_ANSWERS - 1} quick answer return 0`, () => {
+      assert.equal(calculateResult(
+        [
+          ...times(LIFE_COUNT, TEST_ANSWERS.incorrect),
+          ...times(MAX_ANSWERS - LIFE_COUNT, TEST_ANSWERS.quick)
+        ], 1), 0);
     });
   });
 

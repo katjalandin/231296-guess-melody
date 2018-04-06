@@ -1,4 +1,6 @@
 const TIME_LIMIT = 300;
+export const LIFE_COUNT = 3;
+export const MAX_ANSWERS = 10;
 const getPoints = ({ isCorrect, time }) => {
   if (!isCorrect) {
     return -1;
@@ -10,7 +12,7 @@ const getPoints = ({ isCorrect, time }) => {
 };
 
 export const calculateResult = (answers, remainNotes = 0) => {
-  if (!remainNotes) {
+  if (!remainNotes && remainNotes !== 0) {
     return 0;
   }
 
@@ -20,8 +22,9 @@ export const calculateResult = (answers, remainNotes = 0) => {
 
     return res;
   }, {correctCount: 0, totalTime: 0});
+  const incorrectCount = LIFE_COUNT - remainNotes;
 
-  if (correctCount < 10 || totalTime > TIME_LIMIT) {
+  if (correctCount + incorrectCount < MAX_ANSWERS || totalTime > TIME_LIMIT) {
     return 0;
   }
 
