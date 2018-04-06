@@ -3,7 +3,7 @@ export const LIFE_COUNT = 3;
 export const MAX_ANSWERS = 10;
 const getPoints = ({ isCorrect, time }) => {
   if (!isCorrect) {
-    return -1;
+    return -2;
   } else if (time < 30) {
     return 2;
   }
@@ -12,21 +12,20 @@ const getPoints = ({ isCorrect, time }) => {
 };
 
 export const calculateResult = (answers, remainNotes = 0) => {
-  if (!remainNotes && remainNotes !== 0) {
-    return 0;
+  if (!Array.isArray(answers) || answers.length !== MAX_ANSWERS || remainNotes === 0) {
+    return -1;
   }
 
-  const {correctCount, totalTime} = answers.reduce((res, answer) => {
-    res.correctCount += +answer.isCorrect;
-    res.totalTime += answer.time;
+  const totalTime = answers.reduce((res, answer) => {
 
-    return res;
-  }, {correctCount: 0, totalTime: 0});
-  const incorrectCount = LIFE_COUNT - remainNotes;
+    return res + answer.time;
+  }, 0);
 
-  if (correctCount + incorrectCount < MAX_ANSWERS || totalTime > TIME_LIMIT) {
-    return 0;
+  if (totalTime > TIME_LIMIT) {
+    return -1;
   }
+
+
 
   return (answers || []).reduce((res, answer) => res + getPoints(answer), 0);
 };

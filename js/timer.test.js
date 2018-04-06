@@ -1,3 +1,10 @@
-/**
- * Created by RTS on 06.04.2018.
- */
+import {assert} from 'chai';
+
+
+describe(`Result page`, () => {
+  describe(`Calculate result`, () => {
+    it(`Minimum correct answers is 10`, () => {
+      assert.equal(0, 0);
+    });
+  });
+});
