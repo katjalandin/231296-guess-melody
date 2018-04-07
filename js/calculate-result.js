@@ -1,7 +1,7 @@
 const TIME_LIMIT = 300;
 export const LIFE_COUNT = 3;
 export const MAX_ANSWERS = 10;
-const getPoints = ({ isCorrect, time }) => {
+const getPoints = ({isCorrect, time}) => {
   if (!isCorrect) {
     return -2;
   } else if (time < 30) {
@@ -24,8 +24,6 @@ export const calculateResult = (answers, remainNotes = 0) => {
   if (totalTime > TIME_LIMIT) {
     return -1;
   }
-
-
 
   return (answers || []).reduce((res, answer) => res + getPoints(answer), 0);
 };

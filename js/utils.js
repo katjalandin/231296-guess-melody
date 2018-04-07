@@ -19,7 +19,7 @@ export const getRandomArrayItem = (arr) => {
 
 export const times = (n, obj) => {
   const result = [];
-  for(let i = 0; i < n; i++) {
+  for (let i = 0; i < n; i++) {
     result[i] = Object.assign({}, obj);
   }
 

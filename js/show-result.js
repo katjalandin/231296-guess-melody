@@ -1,7 +1,7 @@
-export default (total = res, result) => {
+export default (total, result) => {
   const userResult = Object.assign({}, result, {currentUser: true});
   const all = [...total, userResult].sort((a, b) => a.points < b.points);
-  const pos = all.findIndex(item => item.currentUser) + 1;
+  const pos = all.findIndex((item) => item.currentUser) + 1;
   const persent = Math.round(((all.length - pos) / all.length) * 100);
 
   if (result.points > 0) {
@@ -10,5 +10,5 @@ export default (total = res, result) => {
     return `Время вышло! Вы не успели отгадать все мелодии`;
   }
 
-  return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
+  return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
 };
