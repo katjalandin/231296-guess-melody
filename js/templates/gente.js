@@ -1,22 +1,13 @@
-import {getElementFromTemplate, getRandomArrayItem} from '../utils';
-import showScreen from '../show-screen';
-import resultDefault from './result';
-import resultTimeExpired from './result-time-expired';
-import resultAttemptExpired from './result-attempt-expired';
+import {getElementFromTemplate} from '../utils';
+import {onGetNextLevel} from '../main';
 import getSvgMarkup from './svg';
 import getMistakesMarkup from './mistakes';
 
-const screenTypes = [
-  resultDefault,
-  resultTimeExpired,
-  resultAttemptExpired
-];
-
-const getAnswerMarkup = ({number}) => {
+const getAnswerMarkup = ({src}, number) => {
   return `<div class="genre-answer">
     <div class="player-wrapper">
       <div class="player">
-        <audio></audio>
+        <audio src=${src}></audio>
         <button class="player-control player-control--pause"></button>
         <div class="player-track">
           <span class="player-status"></span>
@@ -37,7 +28,7 @@ export default (level) => {
     <div class="main-wrap">
       <h2 class="title">${level.question}</h2>
       <form class="genre">
-        ${level.answers.map(answer => getAnswerMarkup(answer))}
+        ${level.answers.map((answer, i) => getAnswerMarkup(answer.track, i))}
         <button class="genre-answer-send" type="submit" disabled="true">Ответить</button>
       </form>
     </div>
@@ -62,7 +53,7 @@ export default (level) => {
 
   sendBtn.addEventListener(`click`, (evt) => {
     evt.preventDefault();
-    showScreen(getRandomArrayItem(screenTypes)());
+    onGetNextLevel();
   });
 
   return screen;

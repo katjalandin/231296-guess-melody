@@ -1,6 +1,5 @@
 import {getElementFromTemplate} from '../utils';
-import showScreen from '../show-screen';
-import getGenteScreen from './gente';
+import {onGetNextLevel} from '../main';
 import getSvgMarkup from './svg';
 import getMistakesMarkup from './mistakes';
 
@@ -16,7 +15,7 @@ const getPlayerMarkup = () => {
   </div>`
 };
 
-const getAnswerMarkup = ({number, image, artist}) => {
+const getAnswerMarkup = ({image, artist}, number) => {
   return `<div class="main-answer-wrapper">
     <input class="main-answer-r" type="radio" id="answer-${number}" name="answer" value="val-${number}"/>
     <label class="main-answer" for="answer-${number}">
@@ -33,10 +32,10 @@ export default (level) => {
     ${getSvgMarkup()}
     ${getMistakesMarkup()}
     <div class="main-wrap">
-      <h2 class="title main-title">Кто исполняет эту песню?</h2>
+      <h2 class="title main-title">${level.question}</h2>
       ${getPlayerMarkup()}
       <form class="main-list">
-        ${level.answers.map(answer => getAnswerMarkup(answer))}
+        ${level.answers.map((answer, i) => getAnswerMarkup(answer.track, i))}
       </form>
     </div>
   </section>`;
@@ -47,18 +46,7 @@ export default (level) => {
 
   const answers = screen.querySelectorAll(`.main-answer`);
   [...answers].forEach((answer) => {
-    answer.addEventListener(`click`, () => showScreen(getGenteScreen({
-      question: `Выберите инди-рок треки`,
-      answers: [{
-        number: 1
-      }, {
-        number: 2
-      }, {
-        number: 3
-      }, {
-        number: 4
-      }]
-    })));
+    answer.addEventListener(`click`, () => onGetNextLevel());
   });
 
   return screen;

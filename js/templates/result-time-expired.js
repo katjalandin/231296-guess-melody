@@ -1,6 +1,7 @@
 import {getElementFromTemplate} from '../utils';
 import showScreen from '../show-screen';
 import getWelcomeScreen from './welcome';
+import {onGetNextLevel} from '../main';
 
 export default () => {
   const template = `<!-- Результат игры: проигрыш время вышло -->
@@ -13,7 +14,7 @@ export default () => {
     </section>`;
   const screen = getElementFromTemplate(template);
   const replayBtn = screen.querySelector(`.main-replay`);
-  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen()));
+  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel)));
 
   return screen;
 };

@@ -1,6 +1,7 @@
 import {getElementFromTemplate} from '../utils';
 import showScreen from '../show-screen';
 import getWelcomeScreen from './welcome';
+import {onGetNextLevel} from '../main';
 
 const data = {
   min: 3,
@@ -25,7 +26,7 @@ export default ({min, sec, errorCount, comparison, points, fastPoints} = data) =
     </section>`;
   const screen = getElementFromTemplate(template);
   const replayBtn = screen.querySelector(`.main-replay`);
-  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen()));
+  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel)));
 
   return screen;
 };

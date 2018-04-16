@@ -1,6 +1,4 @@
 import {getElementFromTemplate} from '../utils';
-import showScreen from '../show-screen';
-import getArtistScreen from './artist';
 
 const template = `<!-- Приветствие -->
   <section class="main main--welcome">
@@ -16,27 +14,13 @@ const template = `<!-- Приветствие -->
 
 const welcomeScreen = getElementFromTemplate(template);
 
-export default () => {
+export default (callback) => {
   const screen = welcomeScreen.cloneNode(true);
 
   const playBtn = screen.querySelector(`.main-play`);
 
 
-  playBtn.addEventListener(`click`, () => showScreen(getArtistScreen({
-    answers: [{
-      number: 1,
-      image: `http://placehold.it/134x134`,
-      artist: `Пелагея`
-    }, {
-      number: 2,
-      image: `http://placehold.it/134x134`,
-      artist: `Краснознаменная дивизия имени моей бабушки`
-    }, {
-      number: 3,
-      image: `http://placehold.it/134x134`,
-      artist: `Lorde`
-    }]
-  })));
+  playBtn.addEventListener(`click`, callback);
 
   return screen;
 };
