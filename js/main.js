@@ -23,10 +23,10 @@ export const onGetNextLevel = () => {
 
     switch (level.type) {
       case GAME.TYPES.GENRE:
-        showScreen(getGenreScreen(level));
+        showScreen(getGenreScreen(level, state));
         break;
       case GAME.TYPES.ARTIST:
-        showScreen(getArtistScreen(level));
+        showScreen(getArtistScreen(level, state));
         break;
     }
     return;

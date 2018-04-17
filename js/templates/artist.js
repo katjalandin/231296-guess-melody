@@ -26,8 +26,7 @@ const getAnswerMarkup = ({image, artist}, number) => {
   </div>`
 };
 
-export default (level) => {
-  console.log('artist');
+export default (level, state) => {
   const template = `<section class="main main--level main--level-artist">
     ${getSvgMarkup()}
     ${getMistakesMarkup()}
@@ -46,7 +45,22 @@ export default (level) => {
 
   const answers = screen.querySelectorAll(`.main-answer`);
   [...answers].forEach((answer) => {
-    answer.addEventListener(`click`, () => onGetNextLevel());
+    answer.addEventListener(`click`, (evt) => {
+      const currentState = state.get();
+      const userAnswer = evt.target.getAttribute('alt');
+      const newAnswer = {
+        userAnswer,
+        isRight: level.track.artist === userAnswer,
+        time: 20
+      };
+
+      state.set({
+        userAnswers: [...currentState.userAnswers, newAnswer],
+        mistakes: newAnswer.isRight ? currentState.mistakes : currentState.mistakes + 1
+      });
+
+      onGetNextLevel();
+    });
   });
 
   return screen;

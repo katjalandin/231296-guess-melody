@@ -19,7 +19,7 @@ const getAnswerMarkup = ({src}, number) => {
   </div>`
 };
 
-export default (level) => {
+export default (level, state) => {
   const template = `<!-- Игра на выбор жанра -->
   <section class="main main--level main--level-genre">
     ${getSvgMarkup()}
@@ -41,11 +41,14 @@ export default (level) => {
   const sendBtn = screen.querySelector(`.genre-answer-send`);
   const answers = screen.querySelectorAll(`input[name=answer]`);
   [...answers].forEach((answer) => {
-    answer.addEventListener(`change`, () => {
-      const isAnswerExist = [...answers].some((item) => item.checked);
+    answer.addEventListener(`change`, (evt) => {
+      const item = evt.target;
+      const isAnswerExist = item.checked;
+      [...answers].forEach((item) => item.checked = false);
+      item.checked = isAnswerExist;
       if (isAnswerExist && sendBtn.getAttribute(`disabled`)) {
         sendBtn.removeAttribute(`disabled`);
-      } else if (!isAnswerExist && !sendBtn.getAttribute(`disabled`)) {
+      } else if (!isAnswerExist) {
         sendBtn.setAttribute(`disabled`, `true`);
       }
     });
@@ -53,6 +56,21 @@ export default (level) => {
 
   sendBtn.addEventListener(`click`, (evt) => {
     evt.preventDefault();
+    const currentState = state.get();
+    const selectedCheckbox = [...answers].find((answer) => answer.checked);
+    const number = selectedCheckbox && selectedCheckbox.id.substr(selectedCheckbox.id.indexOf('-') + 1);
+    const userAnswer = level.answers[number];
+    const newAnswer = {
+      userAnswer: userAnswer.track,
+      isRight: userAnswer.isRight,
+      time: 20
+    };
+
+    state.set({
+      userAnswers: [...currentState.userAnswers, newAnswer],
+      mistakes: newAnswer.isRight ? currentState.mistakes : currentState.mistakes + 1
+    });
+
     onGetNextLevel();
   });
 
