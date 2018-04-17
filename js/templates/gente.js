@@ -16,7 +16,7 @@ const getAnswerMarkup = ({src}, number) => {
     </div>
     <input type="checkbox" name="answer" value="answer-${number}" id="a-${number}">
     <label class="genre-answer-check" for="a-${number}"></label>
-  </div>`
+  </div>`;
 };
 
 export default (level, state) => {
@@ -44,7 +44,9 @@ export default (level, state) => {
     answer.addEventListener(`change`, (evt) => {
       const item = evt.target;
       const isAnswerExist = item.checked;
-      [...answers].forEach((item) => item.checked = false);
+      [...answers].forEach((input) => {
+        input.checked = false;
+      });
       item.checked = isAnswerExist;
       if (isAnswerExist && sendBtn.getAttribute(`disabled`)) {
         sendBtn.removeAttribute(`disabled`);
@@ -58,7 +60,7 @@ export default (level, state) => {
     evt.preventDefault();
     const currentState = state.get();
     const selectedCheckbox = [...answers].find((answer) => answer.checked);
-    const number = selectedCheckbox && selectedCheckbox.id.substr(selectedCheckbox.id.indexOf('-') + 1);
+    const number = selectedCheckbox && selectedCheckbox.id.substr(selectedCheckbox.id.indexOf(`-`) + 1);
     const userAnswer = level.answers[number];
     const newAnswer = {
       userAnswer: userAnswer.track,

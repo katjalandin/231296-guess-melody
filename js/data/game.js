@@ -103,13 +103,13 @@ const getRandomGenreLevel = () => {
   };
 
   levelGenre.answers.push({
-    track: track,
+    track,
     isRight: true
   });
 
-  tracksList.slice(0, GAME.GENRE_COUNT - 1).forEach((track) => {
+  tracksList.slice(0, GAME.GENRE_COUNT - 1).forEach((item) => {
     levelGenre.answers.push({
-      track,
+      track: item,
       isRight: false
     });
   });

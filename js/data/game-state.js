@@ -6,15 +6,15 @@ const get = () => {
 };
 
 const set = (newState) => {
-   _state = Object.assign({}, _state, newState)
+  _state = Object.assign({}, _state, newState);
 };
 
 const clear = () => {
-  _state = Object.assign({}, INITIAL_STATE)
+  _state = Object.assign({}, INITIAL_STATE);
 };
 
 export default {
   get,
   set,
   clear
-}
+};

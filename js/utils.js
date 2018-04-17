@@ -32,9 +32,9 @@ export const times = (n, obj) => {
 
 export const mixArray = (arr) => {
   const length = arr.length - 1;
-  for(let index in arr) {
+  for (let i = 0; i < arr.length; i++) {
     const randomIndex = getRandom(length);
-    [arr[randomIndex], arr[index]] = [arr[index], arr[randomIndex]];
+    [arr[randomIndex], arr[i]] = [arr[i], arr[randomIndex]];
   }
 
   return arr;

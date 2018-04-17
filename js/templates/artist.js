@@ -12,7 +12,7 @@ const getPlayerMarkup = () => {
         <span class="player-status"></span>
       </div>
     </div>
-  </div>`
+  </div>`;
 };
 
 const getAnswerMarkup = ({image, artist}, number) => {
@@ -23,7 +23,7 @@ const getAnswerMarkup = ({image, artist}, number) => {
            alt="${artist}" width="134" height="134">
       ${artist}
     </label>
-  </div>`
+  </div>`;
 };
 
 export default (level, state) => {
@@ -47,7 +47,7 @@ export default (level, state) => {
   [...answers].forEach((answer) => {
     answer.addEventListener(`click`, (evt) => {
       const currentState = state.get();
-      const userAnswer = evt.target.getAttribute('alt');
+      const userAnswer = evt.target.getAttribute(`alt`);
       const newAnswer = {
         userAnswer,
         isRight: level.track.artist === userAnswer,
