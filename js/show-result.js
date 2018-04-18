@@ -12,13 +12,13 @@ export const getComparison = (statistics, result) => {
 
 
 export const getResults = (userAnswers) => {
-  const { time, mistakes, fastScores, scores} = userAnswers.reduce((res, answer) => {
+  const {time, mistakes, fastScores, scores} = userAnswers.reduce((res, answer) => {
     const answerScores = getPoints(answer) || 0;
-     if (!answer.isRight) {
-       res.mistakes++;
-     }
+    if (!answer.isRight) {
+      res.mistakes++;
+    }
 
-    if (answer.time < GAME.GUICK_ANSWER_TIME && answer.isRight) {
+    if (answer.time < GAME.QUICK_ANSWER_TIME && answer.isRight) {
       res.fastScores += answerScores;
     }
 

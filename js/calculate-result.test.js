@@ -8,15 +8,15 @@ import {
 
 const TEST_ANSWERS = {
   quick: {
-    isCorrect: true,
+    isRight: true,
     time: 10
   },
   correct: {
-    isCorrect: true,
+    isRight: true,
     time: 50
   },
   incorrect: {
-    isCorrect: false,
+    isRight: false,
     time: 10
   }
 };

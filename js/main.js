@@ -37,7 +37,12 @@ export const onGetNextLevel = () => {
   }
 
   const userStatistic = _getUserStatistics(userResult);
-  const resultData = { ...userResult, comparison: getComparison(statistics, userStatistic)};
+  const resultData = Object.assign({},
+      userResult,
+      {
+        comparison: getComparison(statistics, userStatistic)
+      }
+  );
   statistics.push(userStatistic);
   showScreen(getResultScreen(resultData));
   initializeGame();
