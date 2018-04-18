@@ -7,24 +7,16 @@ import getResultAttemptExpiredScreen from './templates/result-attempt-expired';
 import getGenreScreen from './templates/gente';
 import state from './data/game-state';
 import {getRandomLevels, GAME} from './data/game';
-
-const _getResults = (mistakes) => {
-  // console.log(userAnswers);
-  return {
-    min: 3,
-    sec: 25,
-    errorCount: mistakes,
-    points: 12,
-    fastPoints: 8,
-    comparison: `Вы заняли 2 место из 10. Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков`
-  };
-};
+import {getResults, getComparison} from './show-result';
+export const statistics = [];
 
 export const onGetNextLevel = () => {
-  const {currentLevel, mistakes, levels, userAnswers} = state.get();
+  const {currentLevel, levels, userAnswers} = state.get();
+  const userResult = getResults(userAnswers, statistics);
 
-  if (mistakes === GAME.MISTAKES_COUNT) {
-    showScreen(getResultAttemptExpiredScreen(resultInfo));
+  if (userResult.mistakes === GAME.MISTAKES_COUNT) {
+    showScreen(getResultAttemptExpiredScreen());
+    initializeGame();
     return;
   }
 
@@ -44,8 +36,21 @@ export const onGetNextLevel = () => {
     return;
   }
 
-  const resultInfo = _getResults(mistakes, userAnswers);
-  showScreen(getResultScreen(resultInfo));
+  const userStatistic = _getUserStatistics(userResult);
+  const resultData = { ...userResult, comparison: getComparison(statistics, userStatistic)};
+  statistics.push(userStatistic);
+  showScreen(getResultScreen(resultData));
+  initializeGame();
+};
+
+const _getUserStatistics = ({time, scores, mistakes}) => {
+  const userStatistic = {
+    scores,
+    remainNotes: GAME.MISTAKES_COUNT - mistakes,
+    remainTimes: GAME.TOTAL_TIME - time
+  };
+
+  return userStatistic;
 };
 
 export const initializeGame = () => {
@@ -53,12 +58,12 @@ export const initializeGame = () => {
   state.set({
     levels: getRandomLevels()
   });
-  showScreen(getWelcomeScreen(onGetNextLevel));
 };
 
 
 const onContentLoaded = () => {
   initializeGame();
+  showScreen(getWelcomeScreen(onGetNextLevel));
 };
 
 document.addEventListener(`DOMContentLoaded`, onContentLoaded);

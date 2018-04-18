@@ -1,8 +1,8 @@
 const TIME_LIMIT = 300;
 export const LIFE_COUNT = 3;
 export const MAX_ANSWERS = 10;
-const getPoints = ({isCorrect, time}) => {
-  if (!isCorrect) {
+export const getPoints = ({isRight, time}) => {
+  if (!isRight) {
     return -2;
   } else if (time < 30) {
     return 2;

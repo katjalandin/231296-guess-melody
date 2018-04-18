@@ -1,14 +1,39 @@
-export default (total, result) => {
+import {getPoints} from './calculate-result';
+import {GAME} from './data/game';
+
+export const getComparison = (statistics, result) => {
   const userResult = Object.assign({}, result, {currentUser: true});
-  const all = [...total, userResult].sort((a, b) => b.points - a.points);
+  const all = [...statistics, userResult].sort((a, b) => b.scores - a.scores);
   const pos = all.findIndex((item) => item.currentUser) + 1;
   const persent = Math.round(((all.length - pos) / all.length) * 100);
 
-  if (result.points > 0) {
-    return `Вы заняли ${pos}-ое место из ${all.length}. Это лучше чем у ${persent}% игроков.`;
-  } else if (result.remainTimes === 0) {
-    return `Время вышло! Вы не успели отгадать все мелодии`;
-  }
+  return `Вы заняли ${pos}-ое место из ${all.length}. Это лучше чем у ${persent}% игроков.`;
+};
 
-  return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
+
+export const getResults = (userAnswers) => {
+  const { time, mistakes, fastScores, scores} = userAnswers.reduce((res, answer) => {
+    const answerScores = getPoints(answer) || 0;
+     if (!answer.isRight) {
+       res.mistakes++;
+     }
+
+    if (answer.time < GAME.GUICK_ANSWER_TIME && answer.isRight) {
+      res.fastScores += answerScores;
+    }
+
+    res.time += answer.time;
+    res.scores += answerScores;
+
+    return res;
+  }, {time: 0, mistakes: 0, fastScores: 0, scores: 0});
+
+  return {
+    min: Math.trunc(time / 60),
+    sec: Math.trunc(time - Math.trunc(time / 60) * 60),
+    time,
+    mistakes,
+    scores,
+    fastScores
+  };
 };

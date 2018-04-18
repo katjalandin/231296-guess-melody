@@ -3,8 +3,6 @@ import {mixArray, getRandom} from '../utils';
 export const INITIAL_STATE = {
   levels: [],
   currentLevel: 0,
-  time: 0,
-  mistakes: 0,
   userAnswers: []
 };
 
@@ -18,7 +16,9 @@ export const GAME = {
   TYPES,
   MISTAKES_COUNT: 3,
   ARTIST_COUNT: 3,
+  GUICK_ANSWER_TIME: 20,
   GENRE_COUNT: 4,
+  TOTAL_TIME: 300
 };
 
 export const tracks = [
