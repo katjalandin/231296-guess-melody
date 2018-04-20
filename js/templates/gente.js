@@ -36,21 +36,38 @@ export default (level, state) => {
 
   const genteScreen = getElementFromTemplate(template);
 
-
   const screen = genteScreen.cloneNode(true);
   const sendBtn = screen.querySelector(`.genre-answer-send`);
   const answers = screen.querySelectorAll(`input[name=answer]`);
+
+  const isAnswersExist = () => {
+
+    return [...answers].some((input) => input.checked === true);
+  };
+
+  const getUserAnswers = () => {
+
+    return [...answers].filter((input) => input.checked === true).map((item) => {
+      const number = item.id.substr(item.id.indexOf(`-`) + 1);
+
+      return level.answers[number];
+    });
+  };
+
+  const checkUserAnswersRight = (levelAnswers, userAnswers) => {
+
+    return [...levelAnswers].every((levelAnswer) => {
+      const answer = userAnswers.find((item) => item.track.src === levelAnswer.track.src && item.track.artist === levelAnswer.track.artist) || {isRight: false};
+      return levelAnswer.isRight === answer.isRight || !levelAnswer.isRight === !answer.checked;
+    });
+  };
   [...answers].forEach((answer) => {
-    answer.addEventListener(`change`, (evt) => {
-      const item = evt.target;
-      const isAnswerExist = item.checked;
-      [...answers].forEach((input) => {
-        input.checked = false;
-      });
-      item.checked = isAnswerExist;
-      if (isAnswerExist && sendBtn.getAttribute(`disabled`)) {
+    answer.addEventListener(`change`, () => {
+      const answersExist = isAnswersExist();
+
+      if (answersExist && sendBtn.getAttribute(`disabled`)) {
         sendBtn.removeAttribute(`disabled`);
-      } else if (!isAnswerExist) {
+      } else if (!answersExist) {
         sendBtn.setAttribute(`disabled`, `true`);
       }
     });
@@ -59,12 +76,10 @@ export default (level, state) => {
   sendBtn.addEventListener(`click`, (evt) => {
     evt.preventDefault();
     const currentState = state.get();
-    const selectedCheckbox = [...answers].find((answer) => answer.checked);
-    const number = selectedCheckbox && selectedCheckbox.id.substr(selectedCheckbox.id.indexOf(`-`) + 1);
-    const userAnswer = level.answers[number];
+    const userAnswer = getUserAnswers(level.answers);
     const newAnswer = {
-      userAnswer: userAnswer.track,
-      isRight: userAnswer.isRight,
+      userAnswer,
+      isRight: checkUserAnswersRight(level.answers, userAnswer),
       time: 20
     };
 

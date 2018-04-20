@@ -119,7 +119,7 @@ const getRandomGenreLevel = () => {
 };
 
 
-const createLevel = [getRandomArtistLevel, getRandomGenreLevel];
+const createLevel = [getRandomGenreLevel, getRandomGenreLevel];
 
 export const getRandomLevels = () => {
   const randomLevels = [];
