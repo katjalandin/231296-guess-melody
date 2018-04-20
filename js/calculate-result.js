@@ -1,11 +1,11 @@
-import {GAME} from './data/game';
+import {Game} from './data/game';
 const TIME_LIMIT = 300;
 export const LIFE_COUNT = 3;
 export const MAX_ANSWERS = 10;
 export const getPoints = ({isRight, time}) => {
   if (!isRight) {
     return -2;
-  } else if (time < GAME.QUICK_ANSWER_TIME) {
+  } else if (time < Game.QUICK_ANSWER_TIME) {
     return 2;
   }
 

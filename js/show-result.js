@@ -1,5 +1,5 @@
 import {getPoints} from './calculate-result';
-import {GAME} from './data/game';
+import {Game} from './data/game';
 
 export const getComparison = (statistics, result) => {
   const userResult = Object.assign({}, result, {currentUser: true});
@@ -18,7 +18,7 @@ export const getResults = (userAnswers) => {
       res.mistakes++;
     }
 
-    if (answer.time < GAME.QUICK_ANSWER_TIME && answer.isRight) {
+    if (answer.time < Game.QUICK_ANSWER_TIME && answer.isRight) {
       res.fastScores += answerScores;
     }
 

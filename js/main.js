@@ -6,7 +6,7 @@ import getResultAttemptExpiredScreen from './templates/result-attempt-expired';
 // import getResultTimeExpired from './templates/result-time-expired';
 import getGenreScreen from './templates/gente';
 import state from './data/game-state';
-import {getRandomLevels, GAME} from './data/game';
+import {getRandomLevels, Game} from './data/game';
 import {getResults, getComparison} from './show-result';
 export const statistics = [];
 
@@ -14,22 +14,22 @@ export const onGetNextLevel = () => {
   const {currentLevel, levels, userAnswers} = state.get();
   const userResult = getResults(userAnswers, statistics);
 
-  if (userResult.mistakes === GAME.MISTAKES_COUNT) {
+  if (userResult.mistakes === Game.MISTAKES_COUNT) {
     showScreen(getResultAttemptExpiredScreen());
     initializeGame();
     return;
   }
 
   // TODO show result time expired
-  const level = currentLevel < GAME.TOTAL_QUESTIONS ? levels[currentLevel] : false;
+  const level = currentLevel < Game.TOTAL_QUESTIONS ? levels[currentLevel] : false;
   if (level) {
     state.set({currentLevel: currentLevel + 1});
 
     switch (level.type) {
-      case GAME.TYPES.GENRE:
+      case Game.TYPES.GENRE:
         showScreen(getGenreScreen(level, state));
         break;
-      case GAME.TYPES.ARTIST:
+      case Game.TYPES.ARTIST:
         showScreen(getArtistScreen(level, state));
         break;
     }
@@ -51,8 +51,8 @@ export const onGetNextLevel = () => {
 const _getUserStatistics = ({time, scores, mistakes}) => {
   const userStatistic = {
     scores,
-    remainNotes: GAME.MISTAKES_COUNT - mistakes,
-    remainTimes: GAME.TOTAL_TIME - time
+    remainNotes: Game.MISTAKES_COUNT - mistakes,
+    remainTimes: Game.TOTAL_TIME - time
   };
 
   return userStatistic;
