@@ -3,7 +3,8 @@ import {mixArray, getRandom} from '../utils';
 export const INITIAL_STATE = {
   levels: [],
   currentLevel: 0,
-  userAnswers: []
+  userAnswers: [],
+  mistakes: 0
 };
 
 export const TYPES = {
@@ -119,7 +120,7 @@ const getRandomGenreLevel = () => {
 };
 
 
-const createLevel = [getRandomGenreLevel, getRandomGenreLevel];
+const createLevel = [getRandomArtistLevel, getRandomGenreLevel];
 
 export const getRandomLevels = () => {
   const randomLevels = [];

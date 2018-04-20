@@ -29,7 +29,7 @@ const getAnswerMarkup = ({image, artist}, number) => {
 export default (level, state) => {
   const template = `<section class="main main--level main--level-artist">
     ${getSvgMarkup()}
-    ${getMistakesMarkup()}
+    ${getMistakesMarkup(state.get().mistakes)}
     <div class="main-wrap">
       <h2 class="title main-title">${level.question}</h2>
       ${getPlayerMarkup()}

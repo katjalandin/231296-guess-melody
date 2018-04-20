@@ -23,7 +23,7 @@ export const onGetNextLevel = () => {
   // TODO show result time expired
   const level = currentLevel < Game.TOTAL_QUESTIONS ? levels[currentLevel] : false;
   if (level) {
-    state.set({currentLevel: currentLevel + 1});
+    state.set({currentLevel: currentLevel + 1, mistakes: userResult.mistakes});
 
     switch (level.type) {
       case Game.TYPES.GENRE:
