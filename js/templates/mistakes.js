@@ -1,16 +1,7 @@
-import {Game} from '../data/game';
+import MistakesView from '../views/mistakes-view';
 
-const getMistakes = (mistakeCount) => {
-  let html = ``;
-  for (let i = 0; i < Game.MISTAKES_COUNT - mistakeCount; i++) {
-    html += `<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`;
-  }
+export default (mistakeCount) => {
+  const mistakesView = new MistakesView(mistakeCount);
 
-  return html;
-};
-
-export default (mistakes) => {
-  return `<div class="main-mistakes">
-    ${getMistakes(mistakes)}
-  </div>`;
+  return mistakesView;
 };
