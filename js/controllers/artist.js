@@ -5,9 +5,8 @@ export default (level, state) => {
   const {mistakes} = state.get();
   const artistView = new ArtistView(level, mistakes);
 
-  artistView.onClick = (evt) => {
+  artistView.onClick = (userAnswer) => {
     const currentState = state.get();
-    const userAnswer = evt.target.getAttribute(`alt`);
     const newAnswer = {
       userAnswer,
       isRight: level.track.artist === userAnswer,

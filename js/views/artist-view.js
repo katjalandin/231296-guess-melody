@@ -54,7 +54,10 @@ export default class ArtistView extends AbstracktView {
     const answers = this.element.querySelectorAll(`.main-answer`);
 
     [...answers].forEach((answer) => {
-      answer.addEventListener(`click`, this.onClick);
+      answer.addEventListener(`click`, (evt) => {
+        const userAnswer = evt.target.getAttribute(`alt`);
+        this.onClick(userAnswer);
+      });
     });
 
   }
