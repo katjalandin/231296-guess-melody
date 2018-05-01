@@ -1,10 +1,10 @@
 import showScreen from './show-screen';
-import getWelcomeScreen from './templates/welcome';
-import getArtistScreen from './templates/artist';
-import getResultScreen from './templates/result';
-import getResultAttemptExpiredScreen from './templates/result-attempt-expired';
-// import getResultTimeExpired from './templates/result-time-expired';
-import getGenreScreen from './templates/genre';
+import getWelcomeScreen from './controllers/welcome';
+import getArtistScreen from './controllers/artist';
+import getResultScreen from './controllers/result';
+import getResultAttemptExpiredScreen from './controllers/result-attempt-expired';
+// import getResultTimeExpired from './controllers/result-time-expired';
+import getGenreScreen from './controllers/genre';
 import state from './data/game-state';
 import {getRandomLevels, Game} from './data/game';
 import {getResults, getComparison} from './show-result';

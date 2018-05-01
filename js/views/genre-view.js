@@ -1,6 +1,6 @@
 import AbstracktView from './abstract-view';
-import getSvgMarkup from '../templates/svg';
-import getMistakesMarkup from '../templates/mistakes';
+import getSvgMarkup from '../controllers/svg';
+import getMistakesMarkup from '../controllers/mistakes';
 
 export default class GenreView extends AbstracktView {
   constructor(level, mistakes) {
