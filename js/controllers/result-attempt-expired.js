@@ -5,7 +5,7 @@ import {onGetNextLevel} from '../main';
 
 export default () => {
   const resultAttemptExpiredView = new ResultAttemptExpiredView();
-  resultAttemptExpiredView.onPlayClick = () => {
+  resultAttemptExpiredView.onClick = () => {
     showScreen(getWelcomeScreen(onGetNextLevel).element);
   };
 

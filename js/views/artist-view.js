@@ -46,14 +46,15 @@ export default class ArtistView extends AbstracktView {
   </div>`;
   }
 
-  onAnswerClick() {
+  onClick() {
+    throw new Error(`You need to create handler first!`);
   }
 
   bind() {
     const answers = this.element.querySelectorAll(`.main-answer`);
 
     [...answers].forEach((answer) => {
-      answer.addEventListener(`click`, this.onAnswerClick);
+      answer.addEventListener(`click`, this.onClick);
     });
 
   }

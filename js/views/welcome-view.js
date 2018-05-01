@@ -15,14 +15,14 @@ export default class WelcomeView extends AbstracktView {
       </section>`;
   }
 
-  onPlayClick() {
+  onClick() {
     throw new Error(`You need to create handler first!`);
   }
 
   bind() {
     this.element.querySelector(`.main-play`).onclick = (evt) => {
       evt.preventDefault();
-      this.onPlayClick();
+      this.onClick();
     };
   }
 }

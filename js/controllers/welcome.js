@@ -3,7 +3,7 @@ import WelcomeView from '../views/welcome-view';
 export default (callback) => {
   const welcomeView = new WelcomeView();
 
-  welcomeView.onPlayClick = callback;
+  welcomeView.onClick = callback;
 
   return welcomeView;
 };

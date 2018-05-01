@@ -5,7 +5,7 @@ export default (level, state) => {
   const {mistakes} = state.get();
   const genreView = new GenreView(level, mistakes);
 
-  genreView.onClickAnswer = (evt) => {
+  genreView.onClick = (evt) => {
     evt.preventDefault();
     const currentState = state.get();
     const userAnswer = genreView.getUserAnswers();

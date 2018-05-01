@@ -5,7 +5,7 @@ export default (level, state) => {
   const {mistakes} = state.get();
   const artistView = new ArtistView(level, mistakes);
 
-  artistView.onAnswerClick = (evt) => {
+  artistView.onClick = (evt) => {
     const currentState = state.get();
     const userAnswer = evt.target.getAttribute(`alt`);
     const newAnswer = {

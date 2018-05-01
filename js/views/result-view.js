@@ -25,12 +25,12 @@ export default class ResultView extends AbstracktView {
       </section>`;
   }
 
-  onPlayClick() {
+  onClick() {
     throw new Error(`You need to create handler first!`);
   }
 
   bind() {
     const replayBtn = this.element.querySelector(`.main-replay`);
-    replayBtn.addEventListener(`click`, this.onPlayClick);
+    replayBtn.addEventListener(`click`, this.onClick);
   }
 }

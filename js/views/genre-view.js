@@ -57,7 +57,8 @@ export default class GenreView extends AbstracktView {
     });
   }
 
-  onClickAnswer() {
+  onClick() {
+    throw new Error(`You need to create handler first!`);
   }
 
   _onAnswerChange(answers, sendBtn) {
@@ -79,6 +80,6 @@ export default class GenreView extends AbstracktView {
       answer.addEventListener(`change`, () => this._onAnswerChange(answers, sendBtn));
     });
 
-    sendBtn.addEventListener(`click`, this.onClickAnswer);
+    sendBtn.addEventListener(`click`, this.onClick);
   }
 }
