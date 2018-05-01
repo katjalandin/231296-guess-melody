@@ -44,7 +44,7 @@ export const onGetNextLevel = () => {
       }
   );
   statistics.push(userStatistic);
-  showScreen(getResultScreen(resultData));
+  showScreen(getResultScreen(resultData).element);
   initializeGame();
 };
 
