@@ -15,7 +15,7 @@ export const onGetNextLevel = () => {
   const userResult = getResults(userAnswers, statistics);
 
   if (userResult.mistakes === Game.MISTAKES_COUNT) {
-    showScreen(getResultAttemptExpiredScreen());
+    showScreen(getResultAttemptExpiredScreen().element);
     initializeGame();
     return;
   }

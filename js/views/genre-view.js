@@ -43,7 +43,7 @@ export default class GenreView extends AbstracktView {
   checkUserAnswersRight(levelAnswers, userAnswers) {
 
     return [...levelAnswers].every((levelAnswer) => {
-      const answer = userAnswers.find((item) => item.track.src === levelAnswer.track.src && item.track.artist === levelAnswer.track.artist) || { isRight: false };
+      const answer = userAnswers.find((item) => item.track.src === levelAnswer.track.src && item.track.artist === levelAnswer.track.artist) || {isRight: false};
       return levelAnswer.isRight === answer.isRight || !levelAnswer.isRight === !answer.checked;
     });
   }
