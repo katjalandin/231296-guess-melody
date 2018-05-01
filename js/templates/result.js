@@ -17,7 +17,7 @@ export default ({min, sec, mistakes, comparison, scores, fastScores}) => {
     </section>`;
   const screen = getElementFromTemplate(template);
   const replayBtn = screen.querySelector(`.main-replay`);
-  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel)));
+  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel).element));
 
   return screen;
 };

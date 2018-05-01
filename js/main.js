@@ -68,7 +68,7 @@ export const initializeGame = () => {
 
 const onContentLoaded = () => {
   initializeGame();
-  showScreen(getWelcomeScreen(onGetNextLevel));
+  showScreen(getWelcomeScreen(onGetNextLevel).element);
 };
 
 document.addEventListener(`DOMContentLoaded`, onContentLoaded);

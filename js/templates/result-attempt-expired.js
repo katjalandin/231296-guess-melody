@@ -14,7 +14,7 @@ export default () => {
     </section>`;
   const screen = getElementFromTemplate(template);
   const replayBtn = screen.querySelector(`.main-replay`);
-  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel)));
+  replayBtn.addEventListener(`click`, () => showScreen(getWelcomeScreen(onGetNextLevel).element));
 
   return screen;
 };
