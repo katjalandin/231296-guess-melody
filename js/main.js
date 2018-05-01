@@ -30,7 +30,7 @@ export const onGetNextLevel = () => {
         showScreen(getGenreScreen(level, state));
         break;
       case Game.TYPES.ARTIST:
-        showScreen(getArtistScreen(level, state));
+        showScreen(getArtistScreen(level, state).element);
         break;
     }
     return;
